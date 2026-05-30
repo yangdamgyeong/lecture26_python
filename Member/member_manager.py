@@ -102,7 +102,7 @@ class MemberManager:
     
     def menu_member_remove(self):
         id = input(">> id : ")
-        if self.ms.remove_member(id):
+        if self.ms.remove_member(id, "", ""):
             print('탈퇴 처리되었습니다.')
         else:
             print('회원 탈퇴 처리에 실패하였습니다.')
@@ -110,6 +110,8 @@ class MemberManager:
     def menu_logout(self):
         self.ms.logout()
 
+
+# 회원 메뉴
     def start_member_menu(self):
         print('--------회원 메뉴---------')
         while True:
@@ -144,15 +146,10 @@ class MemberManager:
     def menu_remove_my_info(self):
         check_id = input('>> id : ')
         check_password = input('>> password : ')
-        self.ms.current_user = None
-        if self.ms.login(check_id, check_password):
-            if self.ms.remove_member(check_id):
-                print('회원 탈퇴가 완료되었습니다.')
-                self.current_user = None
-            else:
-                print('회원 탈퇴에 실패하였습니다.')
+        if self.ms.remove_member(self.ms.current_user, check_id, check_password):
+            print('회원 탈퇴가 되었습니다.')
         else:
-            print('아이디 또는 비밀번호를 다시 확인해주세요.')
+            print('회원 탈퇴가 어렵습니다.')
 
     def show_welcome(self):
         print('=' * 50)

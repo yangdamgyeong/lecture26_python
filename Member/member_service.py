@@ -51,9 +51,18 @@ class MemberService:
     def get_member_info(self, id):
         return self.__dao.get_member_info(id)
     
-    def remove_member(self, id):
-        if self.current_user == id or self.current_user == MemberService.ADMIN_ID:
+    def remove_member(self, id, check_id, check_password):
+        if self.current_user == MemberService.ADMIN_ID:
             return self.__dao.remove_member(id)
+        elif self.current_user == id:
+            if check_id is None or check_password is None:
+                return False
+            member = self.__dao.get_member_info(id)
+            if not member:
+                return False
+            if member.get_id() == check_id and member.get_password() == check_password:
+                return self.__dao.remove_member(id)
+        return False
     
     def update_member_info(self, id, member):
         #return self.__dao.update_member_info(id, member)
