@@ -1,6 +1,6 @@
-from Member.member_servicemember import Member
-from Member.member_dao import MemberDAO
-from Member.member_service import MemberService
+from member import Member
+from member_dao import MemberDAO
+from member_service import MemberService
 
 class MemberManager:
     start_menu = ['종료', '로그인', '회원가입']

@@ -2,41 +2,42 @@ from Account.account import Account
 
 class AccountDAO:
     def __init__(self):
-        self.__accountDB = {} # 계좌번호 : account 객체
-    
+        self.__accountDB = {} #계좌 번호 : account 객체
+
+    #회원가입
     def insert_account(self, account):
         account_no = account.get_account_no()
         if account_no not in self.__accountDB:
             self.__accountDB[account_no] = account
             return True
         return False
-
+    # 
     def select_account_by_account_no(self, account_no):
         if account_no in self.__accountDB:
             return self.__accountDB[account_no]
         return None
-
+    
     def select_accounts_by_member_id(self, member_id):
         account_list = []
         for account in self.__accountDB.values():
             if account.get_owner() == member_id:
                 account_list.append(account)
-            
-        if len(account_list): return account_list
+        if len(account_list):
+            return account_list
         return None
-
+    # 회원 목록
     def select_all_accounts(self):
         account_list = list(self.__accountDB.values())
         if len(account_list):
             return account_list
         return None
-
+    
     def update_account(self, account_no, account):
         if account_no in self.__accountDB:
             self.__accountDB[account_no] = account
             return True
-        return False
-
+        return None
+    
     def delete_account(self, account_no):
         if account_no in self.__accountDB:
             self.__accountDB.pop(account_no)
@@ -47,18 +48,16 @@ if __name__ == '__main__':
     dao = AccountDAO()
     ac_list = dao.select_all_accounts()
     print(ac_list)
-    dao.insert_account(Account('111111', 'yang', 10000, '1234'))
-    dao.insert_account(Account('111112', 'dam', 20000, '1234'))
-    dao.insert_account(Account('111113', 'dam', 200000, '1234'))
+    dao.insert_account(Account('111111', 'yangdam', 10000, '1234'))
+    dao.insert_account(Account('111112', 'damgyeong', 10000, '1234'))
+    dao.insert_account(Account('111112', 'damgyeong', 200000, '1234'))
+    dao.insert_account(ac_list)
     for account in dao.select_all_accounts():
         print(account)
-    print(dao.select_account_by_account_no('111114'))
-    for account in dao.select_accounts_by_member_id('yang'):
+    print(dao.select_account_by_account_no('111113'))
+    for account in dao.select_accounts_by_member_id('yangdam'):
         print(account)
     print()
     print(dao.select_account_by_account_no('111112'))
-    dao.update_account('111112', Account('111112', 'dam', 300000, '1234'))
-    print(dao.select_account_by_account_no('111112'))
-    print()
-    dao.delete_account('111113')
-    print(dao.select_account_by_account_no('111113'))
+    dao.update_account('111112', 'damgyeong', 30000, '1234')
+    print(dao.update_account)

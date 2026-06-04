@@ -23,3 +23,4 @@ class Member:
     def __str__(self):
         return f'{self.__member_no}\t{self.__id}\t{self.__name}\n{self.__password}'
 
+

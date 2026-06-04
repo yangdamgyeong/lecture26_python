@@ -22,7 +22,6 @@ class MemberService:
         
         self.__dao.insert_member(member)
         return True
-    
 
     def is_valid_id(self,id):
         # 아이디가 유효한지 확인

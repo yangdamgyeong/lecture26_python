@@ -58,3 +58,4 @@ if __name__ == '__main__':
     members = dao.get_all_members()
     for member in members:
         print(member)
+
