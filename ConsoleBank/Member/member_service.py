@@ -39,6 +39,7 @@ class MemberService:
     
     def logout(self):
         self.current_user = None
+        self.__dao.save_memberDB()
 
     def list_members(self):
         member_list = self.__dao.get_all_members()

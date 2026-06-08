@@ -1,8 +1,21 @@
 from Member.member import Member
+import joblib
 # 회원 데이터 접근 (CRUD) : MemberDAO
 class MemberDAO:
+    MEMBER_DB_FILE = 'memberDB.pkl'
     def __init__(self):
-        self.__memberDB = {}
+        self.__load_memberDB()
+
+    def __load_memberDB(self):
+        #파일이 존재하는지 확인하는 예외처리 추가
+        try:
+            self.__memberDB = joblib.load(MemberDAO.MEMBER_DB_FILE)
+        except FileNotFoundError:
+            self.__memberDB = {}
+    
+    def save_memberDB(self):
+        if self.__memberDB:
+            joblib.dump(self.__memberDB, MemberDAO.MEMBER_DB_FILE)
 #회원가입
     def insert_member(self, member):
         self.__memberDB[member.get_id()] = member
@@ -25,12 +38,14 @@ class MemberDAO:
     def remove_member(self, id):
         if self.is_exist(id):
             self.__memberDB.pop(id)
+            self.save_memberDB()
             return True
         return False
         
     def update_member(self, id, member):
         if self.is_exist(id):
             self.__memberDB[id] = member
+            self.save_memberDB()
             return True
         return False
 
