@@ -20,10 +20,16 @@ class Member:
     def get_address(self):
         return self.__address
     
-    def set_email(self):
-        self.__email
-    def set_address(self):
-        self.__address
+    def set_email(self, email):
+        self.__email = email
+    def set_address(self, address):
+        self.__address = address
+    def set_id(self, id):
+        self.__id = id
+    def set_password(self, new_password):
+        self.__password = new_password
+    def set_name(self, name):
+        self.__name = name
     
     def __str__(self):
         return f'{self.__member_no}\t{self.__id}\t{self.__name}\t{self.__email}\t{self.__address}'

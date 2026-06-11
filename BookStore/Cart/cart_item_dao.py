@@ -41,7 +41,7 @@ class CartItemDAO:
             return True
         return False
     # 회원 장바구니 전체 비우기
-    def delete_allcart_item(self, id):
+    def delete_all_cart_item(self, id):
         if id in self.__cartItemDB:
             self.__cartItemDB[id] = {}
             self.save_cartItemDB()

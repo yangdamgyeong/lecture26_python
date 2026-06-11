@@ -19,7 +19,7 @@ class OrderService:
         return self.__order_dao.select_all_orders(member_id)
     
     def get_order(self, order_no):
-        return self.__order_ao.select_order(order_no)
+        return self.__order_dao.select_order(order_no)
     
     def add_order_item(self, order_no, book_no, count, price):
         self.__order_item_dao.insert_order_item(OrderItem(order_no, book_no, count, price))

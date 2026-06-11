@@ -34,7 +34,7 @@ class CartService:
     
     def update_cart_item_count(self, member_id, book_no, count):
         #수량 변경
-        items = self.__cart_item_cao.select_all_cart_items(member_id)
+        items = self.__cart_item_dao.select_all_cart_items(member_id)
         target = None
         for item in items:
             if item.get_book_no() == book_no:

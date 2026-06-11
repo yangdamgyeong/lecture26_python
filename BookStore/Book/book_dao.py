@@ -3,12 +3,17 @@ import joblib
 
 class BookDAO:
     BOOK_DB_FILE = 'bookDB.pkl'
+
     def __init__(self):
+        self.__book_seq = 0
+        self.__bookDB = {}
         self.__load_bookDB()
 
     def __load_bookDB(self):
         try:
             self.__bookDB = joblib.load(BookDAO.BOOK_DB_FILE)
+            if self.__bookDB:
+                self.__book_seq = max(self.__bookDB.keys())
         except Exception:
             self.__bookDB = {}
     
@@ -19,9 +24,11 @@ class BookDAO:
             
     #도서 신규 등록
     def insert_book(self, book):
-        self.__bookDB[book.get_book_no()] = book
+        self.__book_seq += 1
+        book.set_book_no(self.__book_seq)
+        self.__bookDB[self.__book_seq] = book
         self.save_bookDB()
-        return book.get_book_no()
+        return True
     
     #동일 도서 존재 확인
     def is_book_exist(self, book_no):
@@ -30,9 +37,7 @@ class BookDAO:
         return False
     #도서 목록
     def select_all_book(self):
-        if self.__bookDB:
-            return list(self.__bookDb.values())
-        return []
+        return list(self.__bookDB.values())
     #도서 상세
     def select_book_info(self, book_no):
         if self.is_book_exist(book_no):
@@ -50,7 +55,7 @@ class BookDAO:
     #도서 삭제
     def delete_book(self, book_no):
         if self.is_book_exist(book_no):
-            self.__bookDb.pop(book_no)
+            self.__bookDB.pop(book_no)
             self.save_bookDB()
             return True
         return False

@@ -2,6 +2,8 @@ from Member.member import Member
 import joblib
 
 class MemberDAO:
+    MEMBER_DB_FILE = "member_db.pkl"
+
     def __init__(self):
         self.__load_memberDB()
 

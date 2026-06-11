@@ -39,6 +39,10 @@ class MemberService:
         return self.join_member(member)
     
     def login(self, id, password):
+        if id == MemberService.ADMIN_ID and password == MemberService.ADMIN_PASSWORD:
+            self.current_user = id
+            return True
+        
         member = self.__dao.select_member_info(id.lower())
         if member:
             if password == member.get_password():

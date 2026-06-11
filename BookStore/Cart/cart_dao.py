@@ -8,13 +8,13 @@ class CartDAO:
 
     def __load_cartDB(self):
         try:
-            self.__cartDB = joblib.load(CartDAO.CART_Db_FILE)
+            self.__cartDB = joblib.load(CartDAO.CART_DB_FILE)
         except Exception:
             self.__cartDB = {}
     
     def save_cartDB(self):
         if self.__cartDB:
-            joblib.dump(self.__cartDB, CartDAO.CART_Db_FILE)
+            joblib.dump(self.__cartDB, CartDAO.CART_DB_FILE)
     
     # 장바구니 생성
     def insert_cart(self, cart):

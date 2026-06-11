@@ -20,5 +20,8 @@ class Book:
     def get_stock(self):
         return self.__stock
     
+    def set_book_no(self, book_no):
+        self.__book_no = book_no
+
     def __str__(self):
         return (f'[{self.__book_no}] {self.__title} / {self.__author} / 'f'{self.__publisher} / {self.__price:,}원 / 재고 {self.__stock}권')
