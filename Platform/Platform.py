@@ -126,7 +126,8 @@ class OnlineAssetStore:
         password = input('> 비밀번호 : ')
         name = input('> 이름 : ')
         email = input('> 이메일 : ')
-        member = Member(id, password, name, email, 0, 0)
+        member = Member(id, password, name, email)
+        member.set_cash(100000)
         if self.msv.join_member(member):
             issued = self.msv.get_member_info(id.lower())
             print(f'회원가입이 완료되었습니다. (회원번호 {issued.get_member_no()})')
@@ -363,7 +364,7 @@ class OnlineAssetStore:
             amount = self.input_int('>> 정산 요청 금액 : ')
             if amount is None:
                 return
-            ok, msg = self.ssv.request_settlement_info2(self.msv.current_user, amount)
+            ok, msg = self.ssv.request_settlement_info(self.msv.current_user, amount)
             print(msg)
 
     # ================= 내 정보 메뉴 =================

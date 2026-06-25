@@ -12,8 +12,8 @@ class SettlementService:
     """정산 요청/승인/거절 비즈니스 로직"""
 
     def __init__(self,settlement_dao, member_dao):
-        self.__settlementDAO = SettlementDAO()
-        self.__memberDAO = MemberDAO()
+        self.__settlementDAO = settlement_dao
+        self.__memberDAO = member_dao
 
     def request_settlement_info(self, seller_id, amount):
         """

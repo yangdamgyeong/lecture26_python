@@ -4,6 +4,8 @@
 
 class Purchase:
     """에셋 구매 1건을 표현하는 모델"""
+    DONE = '구매완료'
+    CANCELED = '구매취소'
 
     def __init__(self, purchase_no=0, member_id='', asset_no=0, price=0,
                  purchase_date='', status='구매완료'):

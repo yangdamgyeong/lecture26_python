@@ -81,5 +81,17 @@ class MemberService:
         # DAO의 메서드명이 delete_id로 통일되었으므로 수정
         return self.__dao.delete_id(id)
 
+    # 캐시 충전 (본인만)
+    def charge_cash(self, id, amount):
+        if self.current_user != id:
+            return False
+        if amount <= 0:
+            return False
+        member = self.__dao.select_member_info(id)
+        if not member:
+            return False
+        member.set_cash(member.get_cash() + amount)
+        return self.__dao.update_member_info(id, member)
+
 if __name__ == '__main__':
     msv = MemberService(MemberDAO())

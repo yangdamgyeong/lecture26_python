@@ -12,8 +12,8 @@ class WishlistService:
     """찜 추가/조회/삭제 비즈니스 로직"""
 
     def __init__(self, wishlist_dao, asset_dao):
-        self.__wishlistDAO = WishlistDAO()
-        self.__assetDAO = AssetDAO()
+        self.__wishlistDAO = wishlist_dao
+        self.__assetDAO = asset_dao
 
     def add_wishlist(self, member_id, asset_no):
         """찜 추가"""

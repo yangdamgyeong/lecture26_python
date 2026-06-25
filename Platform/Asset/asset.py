@@ -1,12 +1,12 @@
 # model/asset.py
 # 에셋(영상/디자인 자료) 정보를 담는 모델 클래스
 
-
 class Asset:
     """판매되는 영상·디자인 에셋 1건을 표현하는 모델"""
+    ON_SALE = '판매중'
+    STOPPED = '판매중지'
 
-    def __init__(self, asset_no=0, title='', category='', price=0,
-                 seller_id='', file_url='', preview_url='', status='판매중'):
+    def __init__(self, asset_no, title, category, price, seller_id, file_url, preview_url, status):
         self.__asset_no = asset_no          # 에셋 고유번호 (PK)
         self.__title = title                # 제목
         self.__category = category          # 카테고리 (영상/이미지/템플릿 등)
